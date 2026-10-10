@@ -17,6 +17,7 @@ Hjemmeoppgave Computas
 * Bevarer ikke store bokstaver
 * Hvordan inkludere andre alfabeter 
 * Hvis en nøkkel ikke gis -> algoritme basert på å lete etter frekvenser, printer ut alle evt med sannsynlighet gitt for den som gir mest mening. 
+* Ta høyde for tall? 
 
 ## Forklaring på oppgaven
 * Bevarer ikke mellomrom
