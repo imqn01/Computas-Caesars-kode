@@ -10,21 +10,45 @@ def shifting(key, text):
             output_text += alphabet[index]  
         else: 
             output_text += letter  
-    print(output_text)
+    return(output_text)
     
 def encrypting(key, text): 
-    shifting(key, text)
+    return shifting(key, text)
     
 def decrypting(key, text): 
-    shifting((-key), text) 
+    return shifting((-key), text) 
       
-def hacker(): #TODO
-    hackermode = True
-    return hackermode
+def hacker(filename): 
+    try: 
+        with open(filename, encoding="utf-8") as f: 
+            text = f.read().lower()
+    except FileNotFoundError:
+            print(f"Could not find the file '{filename}'. Remember to add the filetype at the end, feks 'txt'")
+            return 
+    with open("hackerFile.txt", "w", encoding="utf-8") as output: 
+        for key in range(len(alphabet)):
+            output.write(f"Key {key}: \n")
+            output.write(decrypting(key, text))
+            output.write("\n\n")    
+    print("All 26 possible decryptions were written to hackerFile.txt")
+
+
+
+
+
+  #TODO if hackermode -> skip alt og gå rett til: skriv inn filnavn 
+    #TODO Analyze file 
+    #TODO Find the most likely text 
+    #TODO print hacker time
 
 while True: 
     print("What do you want to do today?: cipher file_to_read key method")
     information = input()
+    if information == "hackermode": 
+        print("Which file do you want to hack?")
+        file_to_hack = input()
+        hacker(file_to_hack)
+        break
     try: 
         cipher, filename, key, method =information.split() #TODO legge til andre krypteringsmåter TODO input validation sikkerlig 
         key = int(key)
@@ -40,12 +64,12 @@ while True:
     except FileNotFoundError: 
         print(f"Could not find the file '{filename}'. Remember to add the filetype at the end, feks 'txt'")
         continue
+    if(method == "e"):
+        print(encrypting(key, text))
+    else:
+        print(decrypting(key, text))
     break
     
-if(method == "e"):
-    encrypting(key, text)
-else:
-    decrypting(key, text)
 
         
 
@@ -56,9 +80,6 @@ else:
 
 
 
-#TODO: Legg til fillesning
-#TODO: Hvordan håndtere spacing? 
-#TODO: Legg til valudering og testing 
 #TODO: Legg til hacker modus -> hvor lang tid det trar for en hacker å løse 
 
 
