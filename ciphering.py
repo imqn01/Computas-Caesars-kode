@@ -1,16 +1,13 @@
 import string
-from time import perf_counter
 import sys
 from time import sleep
 from collections import Counter
 import re
-import string
 from time import perf_counter
 import random, string, shutil
 
 
 alphabet = string.ascii_lowercase
-
 #Selve Caesar logikken
 def shifting(key, text): 
     input_text = text
@@ -32,6 +29,7 @@ def decrypting(key, text):
 #Hacker mode
 
 def frequency(filename):
+    start = perf_counter()
     with open(filename, encoding="utf-8") as f:
         text = f.read().lower()
     letters = re.sub(r"[^a-z]", "", text) #alt som ikke er a til z erstates med ingenting. Fjerner mellomrom, punktum og tall. 
@@ -44,7 +42,8 @@ def frequency(filename):
                 with open("FrequencyHack.txt", "w", encoding="utf-8") as output: 
                     output.write(f"Key {key}: \n")
                     output.write(decrypting(key, text))
-                print("The decrpyted text was written into FrequencyHack.txt")
+                    elapsed = perf_counter() - start 
+                print(f"The decrpyted text was written into FrequencyHack.txt. It took {elapsed:.6f} seconds to find the key and decrypt the text.")
                 return key
     print("Could not find 'the' among the top three trigrams.")
                 
@@ -62,8 +61,8 @@ def hacker(filename):
             output.write(f"Key {key}: \n")
             output.write(decrypting(key, text))
             output.write("\n\n")    
-            elapsed = perf_counter() - start   
-    print("All 26 possible decryptions were written to hackerFile.txt")
+        elapsed = perf_counter() - start   
+    print("All 26 possible decryptions were written to bruteForce.txt")
     print(f"Brute force of all 26 keys took {elapsed:.6f} seconds")
     find_key = input("Do you want to automatically find the secret key (y/n)?")
     if find_key == "y": 
