@@ -10,6 +10,13 @@ Hjemmeoppgave Computas
 - [x]  Tallet som forteller hvor mange plasser man skal flytte hver bokstav (kan ta inn et tall)
 - [x]  Flagg: kryptere eller dekryptere -d or -e for dekryptering / kryptering
 
+## Hva ville jeg gjort videre 
+* Sette opp en loop slik at brukeren selv sier når de er ferdig istedenfor å kjøre programmet på nytt
+* Koble opp til andre krypteringsalgoritmer for å sammenligne tiden det kreves for å knekke de
+* Nettside med: 
+  * Visuell fremstilling (mange lærer visuelt)
+
+
 ## Spørsmål til meg selv 
 * Bevare mellom rom eller ikke 
 * Vise til kjøretider 
