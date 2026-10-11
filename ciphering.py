@@ -1,26 +1,23 @@
 import string
 alphabet = string.ascii_lowercase
 
-def encrypting(key, text):
-    cipher_text = ""
-    for letter in text:
+def shifting(key, text): 
+    input_text = text
+    output_text =""
+    for letter in input_text:
         if letter in alphabet: 
             index = (alphabet.index(letter) + key) %26 
-            cipher_text += alphabet[index]  
+            output_text += alphabet[index]  
         else: 
-            cipher_text += letter  
-    print(f"Encrypted text: {cipher_text}")    
+            output_text += letter  
+    print(output_text)
     
-def decrytping(key, text):
-    plain_text=""
-    for letter in text:
-        if letter in alphabet: 
-            index = (alphabet.index(letter) - key) %26 
-            plain_text += alphabet[index]  
-        else: 
-            plain_text += letter
-    print(f"Decrypted text: {plain_text}") 
+def encrypting(key, text): 
+    shifting(key, text)
     
+def decrypting(key, text): 
+    shifting((-key), text) 
+      
 def hacker(): #TODO
     hackermode = True
     return hackermode
@@ -33,21 +30,22 @@ while True:
         key = int(key)
     except ValueError:
         print("Enter four values. The key must be a number: cipher file_to_read key method") 
+        continue
     if method not in ("e", "d"):
         print(f"Invalidinput. You wrote {method} and it needs to be either 'd' or 'e'")
         continue
     try: 
         with open(filename, encoding="utf8") as f: 
-            text = f.read()
+            text = f.read().lower()
     except FileNotFoundError: 
-        print(f"Could not find the file '{filename}'")
+        print(f"Could not find the file '{filename}'. Remember to add the filetype at the end, feks 'txt'")
         continue
     break
     
 if(method == "e"):
     encrypting(key, text)
 else:
-    decrytping(key, text)
+    decrypting(key, text)
 
         
 
@@ -58,7 +56,6 @@ else:
 
 
 
-#TODO i prioritert rekekfølge 
 #TODO: Legg til fillesning
 #TODO: Hvordan håndtere spacing? 
 #TODO: Legg til valudering og testing 
