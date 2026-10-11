@@ -6,6 +6,8 @@ from collections import Counter
 import re
 import string
 from time import perf_counter
+import random, string, shutil
+
 
 alphabet = string.ascii_lowercase
 
@@ -29,23 +31,17 @@ def decrypting(key, text):
 
 #Hacker mode
 
-def frequency(filename): 
+def frequency(filename):
     with open(filename, encoding="utf-8") as f:
-        letters = re.sub(r"[^a-z]", "", f.read().lower())
+        letters = re.sub(r"[^a-z]", "", f.read().lower()) #alt som ikke er a til z erstates med ingenting. Fjerner mellomrom, punktum og tall. 
+    trigrams = [letters[i:i + 3] for i in range(len(letters) - 2)] #Deler alle bokstaver inn i trigrams. Isa, sab. Stopper to tall før slutten så det ikke blir index out of bounce. 
 
-    trigrams = [letters[i:i + 3] for i in range(len(letters) - 2)] 
-
-    for trigram, count in Counter(trigrams).most_common(3):
-        start = perf_counter()
-        key = (alphabet.index(trigram[0]) - alphabet.index("t")) % 26 # shift that would turn T into this trigram's first letter
-        shifted_the = "".join(alphabet[(alphabet.index(c) + key) % 26] for c in "the") # does the same shift also turn H and E into the other two letters?
-
-        if shifted_the == trigram:
-            elapsed = perf_counter() - start 
-            print(f"{trigram} ({count}x) is THE shifted by {key}")
-            print(f"To find the key to turn one of the top three trigrams to 'THE' took {elapsed:.6f} seconds")
-        else:
-            print(f"{trigram} ({count}x) is not THE")
+    for trigram, count in Counter(trigrams).most_common(3): #teller hvor ofte et trigram kommer og gir et par med topp tre og deres frekvens
+        for key in range(26): #tester ut alle nøkler i most common trigrams og ser om noen av de blir THE. 
+            if decrypting(key, trigram) == "the":
+                print(f"{trigram} ({count}x) is 'the' shifted by {key}")
+                return key
+    print("Could not find 'the' among the top three trigrams.")
       
 def hacker(filename): 
     try: 
@@ -73,28 +69,27 @@ def hacker(filename):
 #TODO hacker mode extended frequency 
 
 #Hackermode UI 
-GREEN = "\033[92m"
+GREEN = '\033[95m' #"\033[92m" lilla eller grønn?
 RESET = "\033[0m"
 
 def typewriter(text, delay=0.03, color=GREEN):
     for char in text:
-        sys.stdout.write(color + char + RESET)
-        sys.stdout.flush()
-        sleep(delay)
+        sys.stdout.write(color + char + RESET) #printer en bokstav i grønn og resets fargen. 
+        sys.stdout.flush() #får terminalen til å vise bokstaven akkurat nå
+        sleep(delay) #venter, får det til å se ut som typing 
     print()
 
-def progress_bar(label, steps=30, delay=0.05):
-    for i in range(steps + 1):
+def progress_bar(label, steps=30, delay=0.05): #steps = bredden til bar-en, lable: text in front
+    for i in range(steps + 1): #TODO
         bar = "█" * i + "-" * (steps - i)
         print(f"\r{GREEN}{label} [{bar}] {i * 100 // steps}%{RESET}", end="", flush=True)
         sleep(delay)
     print()
     
-import random, string, shutil
 
-def matrix_rain(duration=2.0, delay=0.05):
-    width = shutil.get_terminal_size().columns
-    end = perf_counter() + duration
+def matrix_rain(duration=2.0, delay=0.05): #TODO veldig usikker
+    width = shutil.get_terminal_size().columns #bredden til terminalen 
+    end = perf_counter() + duration #hvor lang tid animasjonen skal bruke
     while perf_counter() < end:
         line = "".join(
             random.choice(string.ascii_letters + string.digits) if random.random() < 0.15 else " "
