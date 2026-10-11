@@ -37,7 +37,6 @@ def hacker(filename):
     print("All 26 possible decryptions were written to hackerFile.txt")
     print(f"Brute force of all 26 keys took {elapsed:.6f} seconds")
 
-
 while True: 
     print("What do you want to do today?: cipher file_to_read key method")
     information = input()
