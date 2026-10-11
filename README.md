@@ -1,14 +1,14 @@
 # Computas-Caesars-kode
 Hjemmeoppgave Computas
-- [ ]  Leser inn en tekstfil
+- [x]  Leser inn en tekstfil
     - [ ]  PDF
-    - [ ]  Skrevet innput
-    - [ ]  txt
-    - [ ] Leser inn navnet på filen
-    - [ ]  Leser inn teksten
-- [ ]  Krypterer innholdet
-- [ ]  Tallet som forteller hvor mange plasser man skal flytte hver bokstav (kan ta inn et tall)
-- [ ]  Flagg: kryptere eller dekryptere -d or -e for dekryptering / kryptering
+    - [x]  Skrevet innput
+    - [x]  txt
+    - [x] Leser inn navnet på filen
+    - [x]  Leser inn teksten
+- [x]  Krypterer innholdet
+- [x]  Tallet som forteller hvor mange plasser man skal flytte hver bokstav (kan ta inn et tall)
+- [x]  Flagg: kryptere eller dekryptere -d or -e for dekryptering / kryptering
 
 ## Spørsmål til meg selv 
 * Bevare mellom rom eller ikke 
@@ -20,6 +20,14 @@ Hjemmeoppgave Computas
 * Ta høyde for tall? 
 
 ## Forklaring på oppgaven
-* Bevarer ikke mellomrom
 * Engelske alfabetet 
-* 
+* Bevarer mellomrom
+* Bevarer ikke store bokstaver 
+* Hentet ut logikken i encrypt og decrypt da de gjør det samme, men med ulik +/- foran nøkkelen. 
+
+  
+## Notater til samtalen 
+* Se over kryptografi 
+* Gjennbrukbar kode 
+* AI i kode 
+* Try catch fremfor if else
