@@ -38,12 +38,12 @@ def frequency(filename):
     for trigram, count in Counter(trigrams).most_common(3): #teller hvor ofte et trigram kommer og gir et par med topp tre og deres frekvens
         for key in range(26): #tester ut alle nøkler i most common trigrams og ser om noen av de blir THE. 
             if decrypting(key, trigram) == "the":
-                print(f"{trigram} ({count}x) is 'the' shifted by {key}")
+                print(f"\n{trigram} ({count}x) is 'the' shifted by {key}")
                 with open("FrequencyHack.txt", "w", encoding="utf-8") as output: 
                     output.write(f"Key {key}: \n")
                     output.write(decrypting(key, text))
                     elapsed = perf_counter() - start 
-                print(f"The decrpyted text was written into FrequencyHack.txt. It took {elapsed:.6f} seconds to find the key and decrypt the text.")
+                print(f"The decrpyted text was written into FrequencyHack.txt. Decrypting time = {elapsed:.6f}")
                 return key
     print("Could not find 'the' among the top three trigrams.")
                 
@@ -62,19 +62,16 @@ def hacker(filename):
             output.write(decrypting(key, text))
             output.write("\n\n")    
         elapsed = perf_counter() - start   
-    print("All 26 possible decryptions were written to bruteForce.txt")
+    print(f"\nAll 26 possible decryptions were written to bruteForce.txt")
     print(f"Brute force of all 26 keys took {elapsed:.6f} seconds")
     find_key = input("Do you want to automatically find the secret key (y/n)?")
     if find_key == "y": 
         frequency(filename)
     else: 
         pass
-        
     
-#TODO hacker mode extended frequency 
-
 #Hackermode UI 
-GREEN = '\033[95m' #"\033[92m" lilla eller grønn?
+GREEN = "\033[92m" #'\033[95m' #"\033[92m" lilla eller grønn?
 RESET = "\033[0m"
 
 def typewriter(text, delay=0.03, color=GREEN):
@@ -83,14 +80,6 @@ def typewriter(text, delay=0.03, color=GREEN):
         sys.stdout.flush() #får terminalen til å vise bokstaven akkurat nå
         sleep(delay) #venter, får det til å se ut som typing 
     print()
-
-def progress_bar(label, steps=30, delay=0.05): #steps = bredden til bar-en, lable: text in front
-    for i in range(steps + 1): #TODO
-        bar = "█" * i + "-" * (steps - i)
-        print(f"\r{GREEN}{label} [{bar}] {i * 100 // steps}%{RESET}", end="", flush=True)
-        sleep(delay)
-    print()
-    
 
 def matrix_rain(duration=2.0, delay=0.05): #TODO veldig usikker
     width = shutil.get_terminal_size().columns #bredden til terminalen 
