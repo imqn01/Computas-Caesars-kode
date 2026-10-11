@@ -1,4 +1,6 @@
 import string
+from time import perf_counter
+
 alphabet = string.ascii_lowercase
 
 def shifting(key, text): 
@@ -26,20 +28,15 @@ def hacker(filename):
             print(f"Could not find the file '{filename}'. Remember to add the filetype at the end, feks 'txt'")
             return 
     with open("hackerFile.txt", "w", encoding="utf-8") as output: 
+        start = perf_counter()
         for key in range(len(alphabet)):
             output.write(f"Key {key}: \n")
             output.write(decrypting(key, text))
             output.write("\n\n")    
+            elapsed = perf_counter() - start   
     print("All 26 possible decryptions were written to hackerFile.txt")
+    print(f"Brute force of all 26 keys took {elapsed:.6f} seconds")
 
-
-
-
-
-  #TODO if hackermode -> skip alt og gå rett til: skriv inn filnavn 
-    #TODO Analyze file 
-    #TODO Find the most likely text 
-    #TODO print hacker time
 
 while True: 
     print("What do you want to do today?: cipher file_to_read key method")
@@ -70,26 +67,6 @@ while True:
         print(decrypting(key, text))
     break
     
-
-        
-
-
-
-
-
-
-
-
-#TODO: Legg til hacker modus -> hvor lang tid det trar for en hacker å løse 
-
-
-
-# def filereading(filename): 
-#     f = open(f"{filename}")
-#     print(f.read())
-
-#c lawlyplujlgpzgæolgælhjolygvmghssgæopunzuvgvulgpzgzvgiyhålgæohægolgpzguvægkpzæøyilkgibgzvtlæopungøulawljælkpgohkgyhæolygilgmpyzægpughgåpsshnlgæohugzljvukghægyvtltlugmyllsbgilsplålgæohægopjogæolbgklzpylpgjhtlgpgzhgpgjvuxølylk 7 d
-#TODO hvorfor funger det ikke å lime inn? 
-#NB feil i løsningsforslaget 
-#c experience 7 e
-#Encrypted text: lewlyplujl, ikke lawlyplujl. 
+    #TODO Analyze file 
+    #TODO Find the most likely text 
+    #TODO print hacker time
