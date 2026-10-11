@@ -33,15 +33,21 @@ def decrypting(key, text):
 
 def frequency(filename):
     with open(filename, encoding="utf-8") as f:
-        letters = re.sub(r"[^a-z]", "", f.read().lower()) #alt som ikke er a til z erstates med ingenting. Fjerner mellomrom, punktum og tall. 
+        text = f.read().lower()
+    letters = re.sub(r"[^a-z]", "", text) #alt som ikke er a til z erstates med ingenting. Fjerner mellomrom, punktum og tall. 
     trigrams = [letters[i:i + 3] for i in range(len(letters) - 2)] #Deler alle bokstaver inn i trigrams. Isa, sab. Stopper to tall før slutten så det ikke blir index out of bounce. 
 
     for trigram, count in Counter(trigrams).most_common(3): #teller hvor ofte et trigram kommer og gir et par med topp tre og deres frekvens
         for key in range(26): #tester ut alle nøkler i most common trigrams og ser om noen av de blir THE. 
             if decrypting(key, trigram) == "the":
                 print(f"{trigram} ({count}x) is 'the' shifted by {key}")
+                with open("FrequencyHack.txt", "w", encoding="utf-8") as output: 
+                    output.write(f"Key {key}: \n")
+                    output.write(decrypting(key, text))
+                print("The decrpyted text was written into FrequencyHack.txt")
                 return key
     print("Could not find 'the' among the top three trigrams.")
+                
       
 def hacker(filename): 
     try: 
@@ -50,7 +56,7 @@ def hacker(filename):
     except FileNotFoundError:
             print(f"Could not find the file '{filename}'. Remember to add the filetype at the end, feks 'txt'")
             return 
-    with open("hackerFile.txt", "w", encoding="utf-8") as output: 
+    with open("bruteForce.txt", "w", encoding="utf-8") as output: 
         start = perf_counter()
         for key in range(len(alphabet)):
             output.write(f"Key {key}: \n")
@@ -125,7 +131,7 @@ while True:
         print(f"Could not find the file '{filename}'. Remember to add the filetype at the end, feks 'txt'")
         continue
     if(method == "e"):
-        print(encrypting(key, text))
+        print("\nEncrypted message: \n" + encrypting(key, text))
     else:
-        print(decrypting(key, text))
+        print("\nDecrypted message: \n" +decrypting(key, text))
     break
