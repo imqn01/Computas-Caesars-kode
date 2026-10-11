@@ -65,7 +65,3 @@ while True:
     else:
         print(decrypting(key, text))
     break
-    
-    #TODO Analyze file 
-    #TODO Find the most likely text 
-    #TODO print hacker time
