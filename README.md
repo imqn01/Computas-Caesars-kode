@@ -38,3 +38,13 @@ Hjemmeoppgave Computas
 * Gjennbrukbar kode 
 * AI i kode 
 * Try catch fremfor if else
+
+#FAKTA OM CEASAR CIPHER
+* monoalphabetic substitution: 
+* Substitution cipher: 
+* I Caesar er egt nøkkelen alltid 3
+* Shift cipher hvor nøkkelen kan være hvilket som helst tall 
+
+# Krav for at koden skal kjøre 
+* En .txt fil er lastet opp
+* Filen er engelsk, ingen spesielle karakterer 
