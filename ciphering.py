@@ -8,7 +8,7 @@ import random, string, shutil
 
 
 alphabet = string.ascii_lowercase
-#Selve Caesar logikken
+#CAEASAR
 def shifting(key, text): 
     input_text = text
     output_text =""
@@ -26,8 +26,7 @@ def encrypting(key, text):
 def decrypting(key, text): 
     return shifting((-key), text) 
 
-#Hacker mode
-
+#HACKERMODE
 def frequency(filename):
     start = perf_counter()
     with open(filename, encoding="utf-8") as f:
@@ -70,7 +69,7 @@ def hacker(filename):
     else: 
         pass
     
-#Hackermode UI 
+#HACKERMODE DESIGN
 GREEN = "\033[92m" #'\033[95m' #"\033[92m" lilla eller grønn?
 RESET = "\033[0m"
 
@@ -92,7 +91,7 @@ def matrix_rain(duration=2.0, delay=0.05): #TODO veldig usikker
         print(GREEN + line + RESET)
         sleep(delay)
     
-#Interaksjonen 
+#USER INTERACTION 
 while True: 
     print("What do you want to do today?: cipher file_to_read key method")
     information = input()
